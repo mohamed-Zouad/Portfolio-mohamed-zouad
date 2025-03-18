@@ -15,16 +15,15 @@ Voici quelques captures d'écran du projet :
 
 
 ### Page à propos
-![À propos - Portfolio](https://github.com/user-attachments/assets/5a625388-f7f0-4436-8fa9-c82adc5bd9f5)
+![img à propos](https://github.com/user-attachments/assets/b426e793-b854-407f-a2af-10432d28bd3b)
 
 
 ### Page de mes compétences
-![93e2a0bb-cb0f-4b7d-850d-08462ca96483-0001](https://github.com/user-attachments/assets/04c03db0-d103-4649-8724-6659c8f7b33a)
+![img compétences](https://github.com/user-attachments/assets/5d1ffbde-8ab8-4623-96d1-d11a4acdb3dd)
 
 
 ### Page de contact
-![Contact - Portfolio](https://github.com/user-attachments/assets/7c76e22a-a871-4729-a5ec-18aa3be00f11)
-
+![img contact](https://github.com/user-attachments/assets/602366fa-1ef0-4c11-a0ff-35406790972b)
 
 
 ## Comment utiliser ce projet
@@ -37,3 +36,4 @@ Voici quelques captures d'écran du projet :
 - HTML
 - CSS
 - JavaScript
+- Php
