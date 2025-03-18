@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Lien vers Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Lien vers la bibliothèque d'animation AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- CSS interne pour le style de la page -->
+    <style>
+        /* 
+          Importation de la police Google Poppins
+          Poids de police importés : 100, 200, 300, 400, 500, 600 
+        */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
+
+        /* Réinitialisation CSS et paramètres par défaut */
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+        }
+
+        /* 
+          Style pour le body
+          - Utilisation d'une image de fond
+          - Couvre toute la vue
+          - Empêche le défilement horizontal
+        */
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-image: url("./img/background.jpg");
+            background-size: cover;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 
+          Style de la barre de navigation
+          - Hauteur fixe de 10vh
+          - Position relative pour un positionnement précis
+          - z-index élevé pour rester au-dessus des autres contenus
+        */
+        nav {
+            width: 100%;
+            height: 10vh;
+            position: sticky;
+            position: relative;
+            /* Changé de sticky à relative */
+            z-index: 1000;
+            /* Ajout d'un z-index élevé pour la nav */
+        }
+
+        /* Conteneur pour le contenu de la navigation */
+        .nav-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        /* 
+          Style du logo
+          - Couleur blanche avec une taille de 2rem
+          - Ombre de texte pour un effet lumineux sur le span 
+        */
+        .logo {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: rgb(58, 211, 3);
+            text-shadow: 0 0 10px rgb(58, 211, 3);
+        }
+
+        /* 
+          Style des boutons hamburger et annuler
+          - Apparaît uniquement en vue mobile
+          - Position absolue en haut à droite
+        */
+        .hamburg,
+        .cancel {
+            cursor: pointer;
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: white;
+            display: none;
+            font-size: clamp(2.5rem, 0.5rem + 5vw, 3rem);
+        }
+
+        /* 
+          Conteneur des liens de navigation
+          - Disposition flex pour un alignement horizontal
+        */
+        .nav-container .links {
+            display: flex;
+        }
+
+        /* 
+          Style des liens de navigation individuels
+          - Espacement et style pour chaque lien
+          - Effet hover avec une bordure en bas
+        */
+        .nav-container .links a {
+            font-size: 1.2rem;
+            color: white;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: 550;
+            transition: 0.3s linear;
+        }
+
+        .nav-container .links a:hover {
+            color: rgb(58, 211, 3);
+            border-bottom: 2px solid rgb(58, 211, 3);
+        }
+
+        /* Style pour le lien actif */
+        .nav-container .links .active {
+            color: rgb(58, 211, 3);
+            border-bottom: 2px solid rgb(58, 211, 3);
+        }
+
+        /* 
+          Menu déroulant pour la vue mobile
+          - Position fixe avec transformation pour l'animation
+          - Filtre de fond pour un effet flou
+        */
+        .dropdown {
+            z-index: 1000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: translateY(-500px);
+            width: 100%;
+            height: auto;
+            -webkit-backdrop-filter: blur(4px) brightness(40%);
+            backdrop-filter: blur(4px) brightness(40%);
+            box-shadow: 0 0 20px black;
+            transition: 0.2s linear;
+        }
+
+        .dropdown .links a {
+            display: flex;
+            color: white;
+            text-decoration: none;
+            padding: 15px 0;
+            justify-content: center;
+            align-items: center;
+            transition: 0.2s linear;
+        }
+
+        .dropdown .links a:hover {
+            background-color: rgb(58, 211, 3);
+        }
+
+        /* Styles pour la section À propos */
+        .about-container {
+            width: 100%;
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content {
+            width: 80%;
+            max-width: 1200px;
+            background: rgba(0, 0, 0, 0.7);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            color: white;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-header h1 {
+            font-size: 2.5rem;
+            color: rgb(58, 211, 3);
+            text-shadow: 0 0 10px rgb(58, 211, 3);
+            margin-bottom: 1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgb(58, 211, 3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text h2 {
+            color: rgb(58, 211, 3);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            background: rgba(58, 211, 3, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgb(58, 211, 3);
+            cursor: pointer;
+        }
+
+        .stat-item h3 {
+            color: rgb(58, 211, 3);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .content-card {
+            background: rgba(58, 211, 3, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(58, 211, 3, 0.3);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-info {
+            padding: 1.5rem;
+        }
+
+        .card-info h3 {
+            color: rgb(58, 211, 3);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-info p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-info .technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .technology-tag {
+            background: rgba(58, 211, 3, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: rgb(58, 211, 3);
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: rgb(58, 211, 3);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgb(45, 165, 2);
+            transform: translateY(-2px);
+        }
+
+        .award-icon {
+            font-size: 2rem;
+            color: rgb(58, 211, 3);
+            margin-bottom: 1rem;
+        }
+
+        .client-testimonial {
+            font-style: italic;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(58, 211, 3, 0.05);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 884px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav .logo {
+                position: absolute;
+                top: 16px;
+                left: 15px;
+                font-size: 1.5rem;
+            }
+
+            .nav-container .links {
+                display: none;
+            }
+
+            .hamburg,
+            .cancel {
+                display: block;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .about-container {
+                padding: 1rem;
+            }
+
+            .about-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .about-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .about-text h2 {
+                font-size: 1.4rem;
+            }
+
+            .about-text p {
+                font-size: 0.9rem;
+                line-height: 1.4;
+            }
+
+            .about-image {
+                width: 100%;
+                max-height: 250px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .stat-item {
+                padding: 0.8rem;
+            }
+
+            .stat-item h3 {
+                font-size: 1.2rem;
+            }
+
+            .stat-item p {
+                font-size: 0.8rem;
+            }
+
+            .stat-item a {
+                padding: 0.5rem;
+                display: block;
+            }
+        }
+    </style>
+    <title>À propos - Portfolio</title>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                Mohamed <span>Zouad</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a
+                        href="index.html">Accueil</a></div>
+                <div class="link active" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a
+                        href="about.html">À propos</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a
+                        href="skill.html">Compétences</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a
+                        href="service.html">Services</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a
+                        href="contact.html">Contact</a></div>
+            </div>
+        </div>
+        <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        <div class="dropdown">
+            <div class="links">
+                <a href="index.html">Accueil</a>
+                <a href="about.html">À propos</a>
+                <a href="skill.html">Compétences</a>
+                <a href="service.html">Services</a>
+                <a href="contact.html">Contact</a>
+                <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu principal de la page À propos -->
+    <div class="about-container">
+        <div class="about-content" id="aboutContent">
+            <!-- Section en-tête -->
+            <div class="about-header" data-aos="fade-down" data-aos-duration="1500">
+                <h1>À propos de moi</h1>
+            </div>
+
+            <!-- Grille pour l'image et le texte descriptif -->
+            <div class="about-grid">
+                <div class="about-image" data-aos="fade-right" data-aos-duration="1500">
+                    <img src="img/Image.png" alt="Image de profil">
+                </div>
+                <div class="about-text" data-aos="fade-left" data-aos-duration="1500">
+                    <h2>Qui suis-je ?</h2>
+                    <p>Je suis un développeur Full Stack et concepteur UI/UX passionné, spécialisé dans le développement
+                        digital. Mes compétences techniques incluent :
+
+                        - **Frontend** : Maîtrise de HTML, CSS, JavaScript et React, avec une expérience en Material-UI
+                        (MUI) pour des interfaces modernes et réactives.
+                        - **Mobile** : Connaissance de React Native pour le développement d'applications mobiles
+                        cross-platform (APK).
+                        - **Backend** : Expertise en Laravel et Express, ainsi qu'en gestion de bases de données
+                        relationnelles (MySQL) et NoSQL (MongoDB).
+                        - **Outils** : Expérience avec Git, VS Code, et Figma pour la conception UI/UX.
+                        - **Bureautique** : Compétences avancées en Microsoft Excel et Word pour l'analyse et la
+                        documentation.</p>
+
+                    <div class="stats">
+                        <div class="stat-item" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200"
+                            onclick="showProjects()">
+                            <h3>4+</h3>
+                            <p>Projets terminés</p>
+                        </div>
+                        <div class="stat-item" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400"
+                            onclick="showExperience()">
+                            <h3>1+</h3>
+                            <p>Années d'expérience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lien vers la bibliothèque d'animation AOS -->
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+        <!-- JavaScript pour les interactions et animations de la page -->
+        <script>
+
+            // Initialisation de la bibliothèque AOS
+            AOS.init({ offset: 0 });
+
+            // Fonction pour afficher le menu hamburger
+            function hamburg() {
+                const navbar = document.querySelector(".dropdown")
+                navbar.style.transform = "translateY(0px)"
+            }
+
+            // Fonction pour masquer le menu hamburger
+            function cancel() {
+                const navbar = document.querySelector(".dropdown")
+                navbar.style.transform = "translateY(-500px)"
+            }
+
+            // Fonction pour afficher la liste des projets
+            function showProjects() {
+                const aboutContent = document.getElementById('aboutContent');
+                aboutContent.innerHTML = `
+                <a href="about.html" class="back-button" onclick="restoreInitialContent()">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </a>
+                <div class="about-header" data-aos="fade-down" data-aos-duration="1500">
+                    <h1>Mes projets</h1>
+                </div>
+                <div class="content-grid">
+                    ${generateProjectCards()}
+                </div>
+            `;
+                AOS.refresh();
+            }
+
+            // Fonction pour afficher la liste des expériences
+            function showExperience() {
+                const aboutContent = document.getElementById('aboutContent');
+                aboutContent.innerHTML = `
+                <a href="about.html" class="back-button" onclick="restoreInitialContent()">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </a>
+                <div class="about-header" data-aos="fade-down" data-aos-duration="1500">
+                    <h1>Mes expériences</h1>
+                </div>
+                <div class="content-grid">
+                    ${generateExperienceCards()}
+                </div>
+            `;
+                AOS.refresh();
+            }
+
+            // Fonction pour générer les cartes de projets
+            function generateProjectCards() {
+                const projects = [
+                    {
+                        title: "POS Web",
+                        image: "img/posWeb.png",
+                        description: "Gestion de point de vente web",
+                        technologies: ["React", "MySql", "Laravel"]
+                    },
+                    {
+                        title: "POS Mobile",
+                        image: "img/posMobile.webp",
+                        description: "Gestion de point de vente mobile",
+                        technologies: ["ReactNative", "MySql", "Laravel"]
+                    },
+                    {
+                        title: "Site web Portfolio",
+                        image: "img/portfolio.webp",
+                        description: "Site web portfolio responsive avec des animations modernes",
+                        technologies: ["HTML", "CSS", "JavaScript"]
+                    },
+                    {
+                        title: "Application de gestion des tâches",
+                        image: "img/todolist.webp",
+                        description: "Application de gestion des tâches pour le web",
+                        technologies: ["ReactJS", "CSS"]
+                    },
+                    {
+                        title: "Reconnaissance vocale mobile",
+                        image: "img/vocal.webp",
+                        description: "Application de reconnaissance vocale mobile",
+                        technologies: ["ReactNative", "Express"]
+                    }
+                ];
+
+                return projects.map(project => `
+                <div class="content-card" data-aos="fade-up">
+                    <div class="card-image">
+                        <img src="${project.image}" alt="${project.title}">
+                    </div>
+                    <div class="card-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <div class="technologies">
+                            ${project.technologies.map(tech => `
+                                <span class="technology-tag">${tech}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            }
+
+            // Fonction pour générer les cartes d'expériences
+            function generateExperienceCards() {
+                const experiences = [
+                    {
+                        title: "Développeur Frontend",
+                        company: "YuliaGroupe",
+                        period: "01/04/2024 à 01/09/2024",
+                        description: "Développement de sites web et d'applications mobiles responsives"
+                    }
+                ];
+
+                return experiences.map(exp => `
+                <div class="content-card" data-aos="fade-up">
+                    <div class="card-info">
+                        <h3>${exp.title}</h3>
+                        <h4>${exp.company}</h4>
+                        <p class="period">${exp.period}</p>
+                        <p>${exp.description}</p>
+                    </div>
+                </div>
+            `).join('');
+            }
+
+            // Fonction pour restaurer le contenu initial
+            function restoreInitialContent() {
+                const aboutContent = document.getElementById('aboutContent');
+                aboutContent.innerHTML = `
+                <div class="about-header" data-aos="fade-down" data-aos-duration="1500">
+                    <h1>À propos de moi</h1>
+                </div>
+                <div class="about-grid">
+                    <div class="about-image" data-aos="fade-right" data-aos-duration="1500">
+                        <img src="img/zoro.jpg" alt="Image de profil">
+                    </div>
+                    <div class="about-text" data-aos="fade-left" data-aos-duration="1500">
+                        <h2>Qui suis-je ?</h2>
+                        <p>Je suis un développeur Full Stack et concepteur UI/UX passionné, spécialisé dans le développement digital. Mes compétences techniques incluent :
+
+                            - **Frontend** : Maîtrise de HTML, CSS, JavaScript et React, avec une expérience en Material-UI (MUI) pour des interfaces modernes et réactives.
+                            - **Mobile** : Connaissance de React Native pour le développement d'applications mobiles cross-platform (APK).
+                            - **Backend** : Expertise en Laravel et Express, ainsi qu'en gestion de bases de données relationnelles (MySQL) et NoSQL (MongoDB).
+                            - **Outils** : Expérience avec Git, VS Code, et Figma pour la conception UI/UX.
+                            - **Bureautique** : Compétences avancées en Microsoft Excel et Word pour l'analyse et la documentation.</p>
+
+                        <div class="stats">
+                            <div class="stat-item" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="200" onclick="showProjects()">
+                                <h3>4+</h3>
+                                <p>Projets terminés</p>
+                            </div>
+                            <div class="stat-item" data-aos="zoom-in" data-aos-duration="1500" data-aos-delay="400" onclick="showExperience()">
+                                <h3>1+</h3>
+                                <p>Années d'expérience</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+                AOS.refresh();
+            }
+
+        </script>
+</body>
+
+</html>

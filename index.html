@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <!-- Configuration de l'encodage des caractères pour supporter tous les caractères Unicode -->
+  <meta charset="UTF-8">
+
+  <!-- Configuration du viewport pour la responsivité sur les appareils mobiles -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 
+      Importation de Font Awesome pour les icônes des réseaux sociaux et de navigation
+      Version 6.5.1 choisie pour les fonctionnalités et icônes les plus récentes
+    -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- 
+      Importation de la bibliothèque AOS (Animate On Scroll)
+      Utilisée pour créer des animations au défilement
+    -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  <!-- Importation du fichier CSS personnalisé pour des styles supplémentaires -->
+  <link rel="stylesheet" href="css/style.css">
+  <title>Portfolio - Mohamed Zouad</title>
+</head>
+
+<body>
+
+  <!-- 
+      Section de navigation
+      - Utilisation d'un système de grille pour la mise en page
+      - Inclut un logo et un menu de navigation
+      - Responsive avec un menu hamburger pour les mobiles
+    -->
+  <nav>
+    <div class="nav-container">
+
+      <!-- 
+              Logo avec une animation de zoom
+              data-aos-duration: 1500ms pour une animation fluide
+            -->
+      <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+        Mohamed <span>Zouad</span>
+      </div>
+
+      <!-- 
+              Liens de navigation
+              - Utilisation d'une animation fade-up avec des délais échelonnés
+              - Classe active pour la page actuellement visitée
+            -->
+      <div class="links">
+        <div class="link active" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a
+            href="index.html">Accueil</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="200"><a href="about.html">À
+            propos</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a
+            href="skill.html">Compétences</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a
+            href="service.html">Services</a></div>
+        <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a
+            href="contact.html">Contact</a></div>
+      </div>
+    </div>
+
+    <!-- 
+          Icône du menu hamburger
+          - Apparaît sur les versions mobiles
+          - Utilisation d'une icône Font Awesome
+          - Gestionnaire onClick pour ouvrir le menu
+        -->
+    <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+
+    <!-- 
+          Menu déroulant pour les mobiles
+          - Contient les mêmes liens de navigation
+          - Apparaît lorsque l'icône hamburger est cliquée
+          - Inclut une icône de fermeture (x)
+        -->
+    <div class="dropdown">
+      <div class="links">
+        <a href="index.html">Accueil</a>
+        <a href="about.html">À propos</a>
+        <a href="skill.html">Compétences</a>
+        <a href="service.html">Services</a>
+        <a href="contact.html">Contact</a>
+        <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 
+      Section principale du contenu
+      - Utilisation d'une grille pour une mise en page à deux colonnes
+      - Inclut un texte d'introduction et une image de profil
+    -->
+  <section>
+    <div class="main-container">
+      <!-- 
+              Conteneur du contenu
+              - Contient un titre, un effet de machine à écrire et des liens sociaux
+              - Chaque élément a une animation AOS différente
+            -->
+      <div class="content">
+        <!-- Titre avec une animation fade-left -->
+        <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">Bonjour, je suis <span>Mohamed</span>
+        </h1>
+
+        <!-- 
+                  Effet de machine à écrire
+                  - Utilisation de JavaScript pour l'animation
+                  - Animation fade-right pour le conteneur
+                -->
+        <!-- <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900" class="typewriter">Je suis <span
+            class="typewriter-text">Front-End Développeur</span><label for=""></label></div> -->
+
+        <!-- Paragraphe de description avec une animation flip-down -->
+        <p data-aos="flip-down" data-aos-duration="1500" data-aos-delay="1100">
+          Je suis un développeur Full Stack et concepteur UI/UX passionné, spécialisé dans le développement digital. Mes
+          compétences techniques incluent :
+
+          - **Frontend** : Maîtrise de HTML, CSS, JavaScript et React, avec une expérience en Material-UI (MUI) pour des
+          interfaces modernes et réactives.
+          - **Mobile** : Connaissance de React Native pour le développement d'applications mobiles cross-platform (APK).
+          - **Backend** : Expertise en Laravel et Express, ainsi qu'en gestion de bases de données relationnelles
+          (MySQL) et NoSQL (MongoDB).
+          - **Outils** : Expérience avec Git, VS Code, et Figma pour la conception UI/UX.
+          - **Bureautique** : Compétences avancées en Microsoft Excel et Word pour l'analyse et la documentation.
+        </p>
+
+        <!-- 
+                  Liens des réseaux sociaux
+                  - Utilisation des icônes Font Awesome
+                  - Animation fade-up avec des délais échelonnés
+                -->
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/mohamed-zouad-893631306/" data-aos="fade-up" data-aos-duration="1500"
+            data-aos-delay="1300"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/mohamed-Zouad" data-aos="fade-up" data-aos-duration="1500"
+            data-aos-delay="1400"><i class="fa-brands fa-github"></i></a>
+          <a href="https://www.instagram.com/mohamed.zouad2/" data-aos="fade-up" data-aos-duration="1500"
+            data-aos-delay="1500"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+        <!-- 
+                  Bouton de téléchargement du CV
+                  - Animation zoom-out avec le délai le plus long
+                  - Style défini dans le CSS
+                -->
+        <div class="btn" data-aos="zoom-out" data-aos-duration="1500" data-aos-delay="1800">
+          <a href="CV Professionnel Simple zouad mohamed (1).pdf"><button>Télécharger le CV</button></a>
+        </div>
+      </div>
+
+      <!-- 
+              Conteneur de l'image
+              - Utilisation d'une animation zoom-in
+              - Durée plus longue (3000ms) pour un effet dramatique
+            -->
+      <div class="image" data-aos="zoom-in" data-aos-duration="3000">
+        <img src="img/ImageGen.png" alt="Photo de profil">
+      </div>
+    </div>
+  </section>
+
+  <!-- 
+      Importation des scripts
+      - Bibliothèque AOS pour les animations
+      - JavaScript personnalisé pour des fonctionnalités supplémentaires
+    -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    // Initialisation de AOS avec un offset de 0 pour un déclenchement précis
+    AOS.init({ offset: 0 });
+  </script>
+  <script src="./js/script.js"></script>
+</body>
+
+</html>
