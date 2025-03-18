@@ -11,7 +11,7 @@ Ce projet est un portfolio personnel conçu pour montrer mon travail et mes comp
 Voici quelques captures d'écran du projet :
 
 ### Page d'accueil
-![Portfolio - Mohamed Zouad](https://github.com/user-attachments/assets/0a47e767-1ff4-4245-b2ee-841177792ee6)
+![img portfolio](https://github.com/user-attachments/assets/d809dbdf-52d4-4322-aa99-8692418e4661)
 
 
 ### Page à propos
