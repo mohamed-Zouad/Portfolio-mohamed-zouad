@@ -18,6 +18,11 @@ Voici quelques captures d'écran du projet :
 ![img à propos](https://github.com/user-attachments/assets/b426e793-b854-407f-a2af-10432d28bd3b)
 
 
+### Page mes projets
+![img mes projets](https://github.com/user-attachments/assets/9596d0ba-6869-4f1c-938e-2951817162a1)
+
+
+
 ### Page de mes compétences
 ![img compétences](https://github.com/user-attachments/assets/5d1ffbde-8ab8-4623-96d1-d11a4acdb3dd)
 
